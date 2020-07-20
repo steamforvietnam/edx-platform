@@ -397,7 +397,7 @@ class SharedModuleStoreTestCase(
     for Django ORM models that will get cleaned up properly.
     """
     # Tell Django to clean out all databases, not just default
-    multi_db = True
+    databases = '__all__'
 
     @classmethod
     @contextmanager
@@ -486,7 +486,7 @@ class ModuleStoreTestCase(
     CREATE_USER = True
 
     # Tell Django to clean out all databases, not just default
-    multi_db = True
+    databases = '__all__'
 
     @classmethod
     def setUpClass(cls):
