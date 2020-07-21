@@ -34,6 +34,7 @@ SINGLE_PROVIDER_CONFIG_2['slug'] = 'test-slug-2'
 ENTERPRISE_ID = str(uuid4())
 ENTERPRISE_ID_NON_EXISTENT = str(uuid4())
 
+
 @ddt.ddt
 @unittest.skipUnless(testutil.AUTH_FEATURE_ENABLED, testutil.AUTH_FEATURES_KEY + ' not enabled')
 class SAMLProviderConfigTests(APITestCase):

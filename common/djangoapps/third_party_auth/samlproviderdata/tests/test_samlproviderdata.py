@@ -42,6 +42,7 @@ SINGLE_PROVIDER_DATA_2['sso_url'] = 'http://test2.url'
 ENTERPRISE_ID = str(uuid4())
 BAD_ENTERPRISE_ID = str(uuid4())
 
+
 @ddt.ddt
 @unittest.skipUnless(testutil.AUTH_FEATURE_ENABLED, testutil.AUTH_FEATURES_KEY + ' not enabled')
 class SAMLProviderDataTests(APITestCase):
