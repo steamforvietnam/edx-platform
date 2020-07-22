@@ -4,7 +4,6 @@ Tests for SAMLProviderConfig endpoints
 
 import unittest
 import copy
-import ddt
 from uuid import uuid4
 from django.urls import reverse
 from django.contrib.sites.models import Site
@@ -35,7 +34,6 @@ ENTERPRISE_ID = str(uuid4())
 ENTERPRISE_ID_NON_EXISTENT = str(uuid4())
 
 
-@ddt.ddt
 @unittest.skipUnless(testutil.AUTH_FEATURE_ENABLED, testutil.AUTH_FEATURES_KEY + ' not enabled')
 class SAMLProviderConfigTests(APITestCase):
     """
@@ -177,16 +175,16 @@ class SAMLProviderConfigTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(SAMLProviderConfig.objects.count(), orig_count)
 
-    @ddt.data(
-        (ENTERPRISE_LEARNER_ROLE, ENTERPRISE_ID),
-        (ENTERPRISE_ADMIN_ROLE, str(uuid4))
-    )
-    @ddt.unpack
-    def test_unauthenticated_request_is_forbidden(self, role, enterprise_id):
+    def test_unauthenticated_request_is_forbidden(self):
         self.client.logout()
         urlbase = reverse('saml_provider_config-list')
         query_kwargs = {'enterprise_customer_uuid': ENTERPRISE_ID}
         url = '{}?{}'.format(urlbase, urlencode(query_kwargs))
-        set_jwt_cookie(self.client, self.user, [(role, enterprise_id)])
+        set_jwt_cookie(self.client, self.user, [(ENTERPRISE_LEARNER_ROLE, ENTERPRISE_ID)])
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        self.client.logout()
+        set_jwt_cookie(self.client, self.user, [(ENTERPRISE_ADMIN_ROLE, ENTERPRISE_ID_NON_EXISTENT)])
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
