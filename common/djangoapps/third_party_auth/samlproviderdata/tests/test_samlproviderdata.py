@@ -171,7 +171,7 @@ class SAMLProviderDataTests(APITestCase):
 
     @ddt.data(
         (ENTERPRISE_LEARNER_ROLE, ENTERPRISE_ID),
-        (ENTERPRISE_ADMIN_ROLE, str(uuid4))
+        (ENTERPRISE_ADMIN_ROLE, BAD_ENTERPRISE_ID)
     )
     @ddt.unpack
     def test_unauthenticated_request_is_forbidden(self, role, enterprise_id):
