@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from openedx.core.djangoapps.demographics.api.status import (
-    show_user_demographics, get_user_demographics_call_to_action_status,
+    show_user_demographics, call_to_action_dismissed_status,
 )
 from openedx.core.djangoapps.demographics.models import UserDemographics
 
@@ -25,7 +25,7 @@ class DemographicsStatusView(APIView):
         if user_demographics:
             call_to_action_dismissed = user_demographics.call_to_action_dismissed
         else:
-            call_to_action_dismissed = get_user_demographics_call_to_action_status(user)
+            call_to_action_dismissed = call_to_action_dismissed_status(user)
         return {
             'display': show_user_demographics(user),
             'call_to_action_dismissed': call_to_action_dismissed

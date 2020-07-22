@@ -14,3 +14,7 @@ class UserDemographics(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     call_to_action_dismissed = models.BooleanField(default=False)
     history = HistoricalRecords()
+
+    def __str__(self):
+        return '<UserDemographics for {}>'.format(self.user)
+

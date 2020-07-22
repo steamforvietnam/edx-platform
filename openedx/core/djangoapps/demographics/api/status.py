@@ -21,7 +21,7 @@ def show_user_demographics(user, enrollments=None, entitlements=None):
     return is_user_in_microbachelors_program and not is_enterprise_learner(user)
 
 
-def get_user_demographics_call_to_action_status(user):
+def call_to_action_dismissed_status(user):
     try:
         return UserDemographics.objects.get(user=user).call_to_action_dismissed
     except UserDemographics.DoesNotExist:
