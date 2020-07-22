@@ -1,6 +1,5 @@
 import unittest
 import copy
-import ddt
 import pytz
 from uuid import uuid4
 from datetime import datetime
@@ -43,7 +42,6 @@ ENTERPRISE_ID = str(uuid4())
 BAD_ENTERPRISE_ID = str(uuid4())
 
 
-@ddt.ddt
 @unittest.skipUnless(testutil.AUTH_FEATURE_ENABLED, testutil.AUTH_FEATURES_KEY + ' not enabled')
 class SAMLProviderDataTests(APITestCase):
     """
@@ -169,16 +167,17 @@ class SAMLProviderDataTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    @ddt.data(
-        (ENTERPRISE_LEARNER_ROLE, ENTERPRISE_ID),
-        (ENTERPRISE_ADMIN_ROLE, BAD_ENTERPRISE_ID)
-    )
-    @ddt.unpack
-    def test_unauthenticated_request_is_forbidden(self, role, enterprise_id):
+    def test_unauthenticated_request_is_forbidden(self):
         self.client.logout()
         urlbase = reverse('saml_provider_data-list')
         query_kwargs = {'enterprise_customer_uuid': ENTERPRISE_ID}
         url = '{}?{}'.format(urlbase, urlencode(query_kwargs))
-        set_jwt_cookie(self.client, self.user, [(role, enterprise_id)])
+        set_jwt_cookie(self.client, self.user, [(ENTERPRISE_LEARNER_ROLE, ENTERPRISE_ID)])
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # manually running second case as DDT is having issues.
+        self.client.logout()
+        set_jwt_cookie(self.client, self.user, [(ENTERPRISE_ADMIN_ROLE, BAD_ENTERPRISE_ID)])
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
