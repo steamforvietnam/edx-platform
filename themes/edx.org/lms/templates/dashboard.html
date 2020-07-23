@@ -154,7 +154,7 @@ from student.models import CourseEnrollment
     account_mfe_url = getattr(settings, 'ACCOUNT_MICROFRONTEND_URL', '') or ''
   %>
   % if display_demographics_banner:
-  <a class="demographics-banner-link" href="${account_mfe_url}#demographics-information">
+  <a id="demographics-banner-link" href="${account_mfe_url}#demographics-information">
     <div class="demographics-banner d-flex justify-content-lg-between flex-row py-1 px-4 mb-2 mb-lg-4">
       <div class="d-flex justify-content-left align-items-center flex-column flex-lg-row">
         <img class="demographics-banner-icon d-none d-lg-inline-block" src="${static.url('edx.org/images/quote_prompt.png')}" alt="" aria-hidden="true">

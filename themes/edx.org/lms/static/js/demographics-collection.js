@@ -1,5 +1,3 @@
-console.log('Demographics javascript file loaded');
-
 $(document).ready(function() {
     'use strict';
 
@@ -18,7 +16,8 @@ $(document).ready(function() {
             }),
             context: this,
             success: function() {
-                $('#demographics-banner').hide();
+                debugger;
+                $('#demographics-banner-link').hide();
             }
         });
     });

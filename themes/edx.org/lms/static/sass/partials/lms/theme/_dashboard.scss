@@ -17,7 +17,8 @@
     }
     .demographics-dismiss-btn:hover {
       background-image: none;
-        background-color: #23419f;
+      background-color: #23419f;
+      border: none;
     }
 
     .demographics-banner-icon {
@@ -43,11 +44,8 @@
         font-size: 24px;
       }
     }
-
-    .demographics-banner-link:hover {
-      text-decoration: none;
-    }
   }
+
   .side-container {
     .wrapper-coaching {
       border: 1px solid $gray-500;
