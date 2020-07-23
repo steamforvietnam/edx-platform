@@ -17,10 +17,12 @@ from xmodule.modulestore.tests.factories import CourseFactory
 from openedx.core.djangoapps.catalog.tests.factories import (
     ProgramFactory,
 )
-from openedx.core.djangoapps.demographics.tests.factories import UserDemographicsFactory
 from openedx.core.djangoapps.demographics.api.status import show_user_demographics, show_call_to_action_for_user
 from openedx.features.enterprise_support.tests.factories import EnterpriseCustomerUserFactory
 from openedx.core.djangolib.testing.utils import skip_unless_lms
+
+if settings.ROOT_URLCONF == 'lms.urls':
+    from openedx.core.djangoapps.demographics.tests.factories import UserDemographicsFactory
 
 MICROBACHELORS = 'microbachelors'
 
