@@ -2,6 +2,10 @@
 Test status utilities
 """
 import mock
+
+from pytest import mark
+from unittest import TestCase
+
 from course_modes.models import CourseMode
 from course_modes.tests.factories import CourseModeFactory
 from opaque_keys.edx.keys import CourseKey
@@ -13,7 +17,8 @@ from xmodule.modulestore.tests.factories import CourseFactory
 from openedx.core.djangoapps.catalog.tests.factories import (
     ProgramFactory,
 )
-from openedx.core.djangoapps.demographics.api.status import show_user_demographics
+from openedx.core.djangoapps.demographics.tests.factories import UserDemographicsFactory
+from openedx.core.djangoapps.demographics.api.status import show_user_demographics, show_call_to_action_for_user
 from openedx.features.enterprise_support.tests.factories import EnterpriseCustomerUserFactory
 from openedx.core.djangolib.testing.utils import skip_unless_lms
 
@@ -45,3 +50,26 @@ class TestShowDemographics(SharedModuleStoreTestCase):
         mock_get_programs_by_type.return_value = [self.program]
         EnterpriseCustomerUserFactory.create(user_id=self.user.id)
         self.assertFalse(show_user_demographics(user=self.user))
+
+
+@skip_unless_lms
+@mark.django_db
+class TestShowCallToAction(TestCase):
+    def setUp(self):
+        super(TestShowCallToAction, self).setUp()
+        self.user = UserFactory()
+
+    def test_new_user(self):
+        self.assertTrue(show_call_to_action_for_user(self.user))
+
+    def test_existing_user_no_dismiss(self):
+        user_demographics = UserDemographicsFactory.create(user=self.user)
+        self.assertTrue(user_demographics.show_call_to_action)
+        self.assertTrue(show_call_to_action_for_user(self.user))
+
+    def test_existing_user_dismissed(self):
+        user_demographics = UserDemographicsFactory.create(user=self.user)
+        user_demographics.show_call_to_action = False
+        user_demographics.save()
+        self.assertFalse(user_demographics.show_call_to_action)
+        self.assertFalse(show_call_to_action_for_user(self.user))
