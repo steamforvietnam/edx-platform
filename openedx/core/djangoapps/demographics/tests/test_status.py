@@ -52,8 +52,8 @@ class TestShowDemographics(SharedModuleStoreTestCase):
         self.assertFalse(show_user_demographics(user=self.user))
 
 
-@skip_unless_lms
 @mark.django_db
+@skip_unless_lms
 class TestShowCallToAction(TestCase):
     def setUp(self):
         super(TestShowCallToAction, self).setUp()
