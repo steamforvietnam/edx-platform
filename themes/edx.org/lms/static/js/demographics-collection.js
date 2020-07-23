@@ -16,7 +16,6 @@ $(document).ready(function() {
             }),
             context: this,
             success: function() {
-                debugger;
                 $('#demographics-banner-link').hide();
             }
         });
