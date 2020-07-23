@@ -21,4 +21,4 @@ class UserDemographics(TimeStampedModel):
         verbose_name_plural = "user demographic"
 
     def __str__(self):
-        return '<UserDemographics for {}>'.format(self.user)
+        return 'UserDemographics for {}'.format(self.user)
