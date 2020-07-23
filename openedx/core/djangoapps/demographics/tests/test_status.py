@@ -3,6 +3,7 @@ Test status utilities
 """
 import mock
 
+from django.conf import settings
 from pytest import mark
 from unittest import TestCase
 
@@ -52,6 +53,7 @@ class TestShowDemographics(SharedModuleStoreTestCase):
         mock_get_programs_by_type.return_value = [self.program]
         EnterpriseCustomerUserFactory.create(user_id=self.user.id)
         self.assertFalse(show_user_demographics(user=self.user))
+
 
 @skip_unless_lms
 @mark.django_db
