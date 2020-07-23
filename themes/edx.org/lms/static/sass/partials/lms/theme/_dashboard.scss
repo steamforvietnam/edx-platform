@@ -2,20 +2,22 @@
   .demographics-banner {
     background-color: #23419f;
     border-radius: 12px;
+    @media (min-width: 1200px) {
+      height: 64px;
+    }
 
-    //.demographics-button-circle {
-    //  @media (min-width: 1200px) {
-    //    height: 64px;
-    //  }
-    //}
     .btn-circle {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       padding: 6px 0px;
       border-radius: 15px;
       text-align: center;
       font-size: 20px;
       line-height: 1.42857;
+    }
+    .demographics-dismiss-btn:hover {
+      background-image: none;
+        background-color: #23419f;
     }
 
     .demographics-banner-icon {
@@ -40,6 +42,10 @@
       .fa-thumbs-up {
         font-size: 24px;
       }
+    }
+
+    .demographics-banner-link:hover {
+      text-decoration: none;
     }
   }
   .side-container {
