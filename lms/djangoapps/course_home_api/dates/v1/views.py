@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from edx_django_utils import monitoring as monitoring_utils
+from django.http.response import Http404
 from edx_rest_framework_extensions.auth.jwt.authentication import JwtAuthentication
 from edx_rest_framework_extensions.auth.session.authentication import SessionAuthenticationAllowInactiveUser
 from opaque_keys.edx.keys import CourseKey
@@ -74,7 +75,7 @@ class DatesTabView(RetrieveAPIView):
         course_key = CourseKey.from_string(course_key_string)
 
         if not course_home_mfe_dates_tab_is_active(course_key):
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise Http404
 
         # Enable NR tracing for this view based on course
         monitoring_utils.set_custom_metric('course_id', course_key_string)
