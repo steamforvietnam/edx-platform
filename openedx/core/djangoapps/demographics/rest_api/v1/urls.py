@@ -2,11 +2,10 @@
 URL Routes for this app.
 """
 from django.conf.urls import url
-from .views import DemographicsStatusView  ##, UserDemographicsView
+from .views import DemographicsStatusView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-# router.register(r'user', UserDemographicsView, basename='user_demographics')
 
 urlpatterns = [
     url(
@@ -14,5 +13,4 @@ urlpatterns = [
         DemographicsStatusView.as_view(),
         name='demographics_status'
     ),
-    # router.urls,
 ]

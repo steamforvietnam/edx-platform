@@ -11,7 +11,7 @@ class UserDemographicsAdmin(admin.ModelAdmin):
     """
     Admin for UserDemographics Model
     """
-    list_display = ('user', 'call_to_action_dismissed')
+    list_display = ('user', 'show_call_to_action')
     readonly_fields = ('user',)
 
     class Meta(object):

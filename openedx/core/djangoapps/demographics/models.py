@@ -12,9 +12,11 @@ class UserDemographics(TimeStampedModel):
     IDA and features
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    call_to_action_dismissed = models.BooleanField(default=False)
-    history = HistoricalRecords()
+    show_call_to_action = models.BooleanField(default=True)
+    history = HistoricalRecords(app='demographics')
+
+    class Meta:
+        app_label = 'demographics'
 
     def __str__(self):
         return '<UserDemographics for {}>'.format(self.user)
-

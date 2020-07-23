@@ -14,7 +14,7 @@ $(document).ready(function() {
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify({
-                call_to_action_dismissed: true
+                show_call_to_action: false
             }),
             context: this,
             success: function() {
