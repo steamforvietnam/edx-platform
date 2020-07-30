@@ -1,4 +1,4 @@
 [submodule "themes/steam_theme"]
 	path = themes/steam_theme
 	url = https://github.com/steamforvietnam/steam_theme.git
-  branch = develop
+  branch = master
