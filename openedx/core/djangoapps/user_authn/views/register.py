@@ -482,6 +482,7 @@ class RegistrationView(APIView):
         """
         data = request.POST.copy()
         self._handle_terms_of_service(data)
+        self._handle_password_check(data)
 
         response = self._handle_duplicate_email_username(request, data)
         if response:
@@ -531,7 +532,7 @@ class RegistrationView(APIView):
             errors["confirm_password"] = [{"user_message": "The passwords must match2."}]
         
         if errors:
-            return self._create_response(request, errors, status_code=409)
+            return self._create_response(request, errors, status_code=400)
 
     def _create_account(self, request, data):
         response, user = None, None

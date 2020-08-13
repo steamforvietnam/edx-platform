@@ -245,7 +245,7 @@ class AccountCreationForm(forms.Form):
                 "password" in self.cleaned_data and
                 self.cleaned_data["password"] != confirm_password
         ):
-            raise ValidationError(_("The passwords must match."))
+            raise ValidationError(_("The passwords must match.3"))
         return confirm_password
 
     def clean_email(self):
