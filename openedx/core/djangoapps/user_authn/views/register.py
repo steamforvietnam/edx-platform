@@ -528,7 +528,7 @@ class RegistrationView(APIView):
         confirm_password = data.get("confirm_password")
 
         if password and confirm_password and password != confirm_password:
-            errors["confirm_password"] = [{"user_message": "The passwords must match."}]
+            errors["confirm_password"] = [{"user_message": "The passwords must match2."}]
         
         if errors:
             return self._create_response(request, errors, status_code=409)
