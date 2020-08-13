@@ -153,6 +153,7 @@ class AccountCreationForm(forms.Form):
     )
 
     password = forms.CharField()
+    confirm_password = forms.CharField()
 
     name = forms.CharField(
         min_length=accounts.NAME_MIN_LENGTH,
