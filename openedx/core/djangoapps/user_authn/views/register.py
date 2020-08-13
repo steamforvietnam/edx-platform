@@ -482,7 +482,6 @@ class RegistrationView(APIView):
         """
         data = request.POST.copy()
         self._handle_terms_of_service(data)
-        self._handle_password_check(data)
 
         response = self._handle_duplicate_email_username(request, data)
         if response:
@@ -522,17 +521,6 @@ class RegistrationView(APIView):
         # for TOS, privacy policy, etc.
         if data.get("honor_code") and "terms_of_service" not in data:
             data["terms_of_service"] = data["honor_code"]
-    
-    def _handle_password_check(self, data):
-        #Check if the two passwords match
-        password = data.get("password")
-        confirm_password = data.get("confirm_password")
-
-        if password and confirm_password and password != confirm_password:
-            errors["confirm_password"] = [{"user_message": "The passwords must match2."}]
-        
-        if errors:
-            return self._create_response(request, errors, status_code=400)
 
     def _create_account(self, request, data):
         response, user = None, None
