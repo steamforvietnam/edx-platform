@@ -2801,6 +2801,7 @@ REGISTRATION_EXTRA_FIELDS = {
     'terms_of_service': 'hidden',
     'city': 'hidden',
     'country': 'hidden',
+    'confirm_password': 'required'
 }
 
 REGISTRATION_FIELD_ORDER = [
@@ -2811,6 +2812,7 @@ REGISTRATION_FIELD_ORDER = [
     "email",
     "confirm_email",
     "password",
+    "confirm_password",
     "city",
     "state",
     "country",

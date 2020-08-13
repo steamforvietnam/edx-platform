@@ -45,6 +45,7 @@ from openedx.core.djangoapps.user_api.accounts.api import (
     get_email_validation_error,
     get_name_validation_error,
     get_password_validation_error,
+    get_confirm_password_validation_error,
     get_username_existence_validation_error,
     get_username_validation_error
 )
@@ -520,6 +521,17 @@ class RegistrationView(APIView):
         # for TOS, privacy policy, etc.
         if data.get("honor_code") and "terms_of_service" not in data:
             data["terms_of_service"] = data["honor_code"]
+    
+    def _handle_password_check(self, data):
+        #Check if the two passwords match
+        password = data.get("password")
+        confirm_password = data.get("confirm_password")
+
+        if password and confirm_password and password != confirm_password:
+            errors["confirm_password"] = [{"user_message": "The passwords must match."}]
+        
+        if errors:
+            return self._create_response(request, errors, status_code=409)
 
     def _create_account(self, request, data):
         response, user = None, None
@@ -708,6 +720,11 @@ class RegistrationValidationView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         return get_password_validation_error(password, username, email)
+    
+    def confirm_password_handler(self, request):
+        password = request.data.get('password')
+        confirm_password = request.data.get('confirm_password')
+        return get_confirm_password_validation_error(confirm_password, password)
 
     def country_handler(self, request):
         country = request.data.get('country')
@@ -719,6 +736,7 @@ class RegistrationValidationView(APIView):
         "email": email_handler,
         "confirm_email": confirm_email_handler,
         "password": password_handler,
+        "confirm_password": confirm_password_handler,
         "country": country_handler
     }
 
@@ -734,6 +752,7 @@ class RegistrationValidationView(APIView):
             "email": "mslm@gmail.com",
             "confirm_email": "mslm@gmail.com",
             "password": "password123",
+            "confirm_password": "password123",
             "country": "PK"
         }
         ```
