@@ -2774,7 +2774,7 @@ if FEATURES.get('ENABLE_CORS_HEADERS'):
         'use-jwt-cookie',
     )
 
-CORS_ORIGIN_WHITELIST = []
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 CORS_ORIGIN_ALLOW_ALL = False
 # Default cache expiration for the cross-domain proxy HTML page.
 # This is a static page that can be iframed into an external page
