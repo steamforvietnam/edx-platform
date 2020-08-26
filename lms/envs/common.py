@@ -2768,7 +2768,7 @@ FEATURES['ENABLE_CREDIT_ELIGIBILITY'] = ENABLE_CREDIT_ELIGIBILITY
 
 if FEATURES.get('ENABLE_CORS_HEADERS'):
     CORS_ALLOW_CREDENTIALS = True
-    CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+    CORS_ORIGIN_WHITELIST = ('localhost:3000')
     CORS_ORIGIN_ALLOW_ALL = False
     CORS_ALLOW_HEADERS = corsheaders_default_headers + (
         'use-jwt-cookie',
