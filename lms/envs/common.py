@@ -140,7 +140,7 @@ FEATURES = {
     'ENABLE_XBLOCK_VIEW_ENDPOINT': False,
 
     # Allows to configure the LMS to provide CORS headers to serve requests from other domains
-    'ENABLE_CORS_HEADERS': False,
+    'ENABLE_CORS_HEADERS': True,
 
     # Can be turned off if course lists need to be hidden. Effects views and templates.
     'COURSES_ARE_BROWSABLE': True,
@@ -2768,13 +2768,13 @@ FEATURES['ENABLE_CREDIT_ELIGIBILITY'] = ENABLE_CREDIT_ELIGIBILITY
 
 if FEATURES.get('ENABLE_CORS_HEADERS'):
     CORS_ALLOW_CREDENTIALS = True
-    CORS_ORIGIN_WHITELIST = ()
+    CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
     CORS_ORIGIN_ALLOW_ALL = False
     CORS_ALLOW_HEADERS = corsheaders_default_headers + (
         'use-jwt-cookie',
     )
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+CORS_ORIGIN_WHITELIST = []
 CORS_ORIGIN_ALLOW_ALL = False
 # Default cache expiration for the cross-domain proxy HTML page.
 # This is a static page that can be iframed into an external page
