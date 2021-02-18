@@ -140,7 +140,7 @@ FEATURES = {
     'ENABLE_XBLOCK_VIEW_ENDPOINT': False,
 
     # Allows to configure the LMS to provide CORS headers to serve requests from other domains
-    'ENABLE_CORS_HEADERS': False,
+    'ENABLE_CORS_HEADERS': True,
 
     # Can be turned off if course lists need to be hidden. Effects views and templates.
     'COURSES_ARE_BROWSABLE': True,
@@ -282,13 +282,16 @@ FEATURES = {
     'ENABLE_PUBLISHER': False,
 
     # Milestones application flag
-    'MILESTONES_APP': False,
+    'MILESTONES_APP': True,
 
     # Organizations application flag
     'ORGANIZATIONS_APP': False,
 
     # Prerequisite courses feature flag
-    'ENABLE_PREREQUISITE_COURSES': False,
+    'ENABLE_PREREQUISITE_COURSES': True,
+
+    # Entrance exams feature flag
+    'ENTRANCE_EXAMS': True,
 
     # For easily adding modes to courses during acceptance testing
     'MODE_CREATION_FOR_TESTING': False,
@@ -384,7 +387,7 @@ FEATURES = {
     'ALLOW_EMAIL_ADDRESS_CHANGE': True,
 
     # Whether the bulk enrollment view is enabled.
-    'ENABLE_BULK_ENROLLMENT_VIEW': False,
+    'ENABLE_BULK_ENROLLMENT_VIEW': True,
 
     # Whether course goals is enabled.
     'ENABLE_COURSE_GOALS': True,
@@ -2774,7 +2777,7 @@ if FEATURES.get('ENABLE_CORS_HEADERS'):
         'use-jwt-cookie',
     )
 
-CORS_ORIGIN_WHITELIST = []
+CORS_ORIGIN_WHITELIST = ['live.steamforvietnam.org', 'www.live.steamforvietnam.org']
 CORS_ORIGIN_ALLOW_ALL = False
 # Default cache expiration for the cross-domain proxy HTML page.
 # This is a static page that can be iframed into an external page

@@ -239,13 +239,13 @@ FEATURES = {
     'ENABLE_CONTENT_LIBRARIES': True,
 
     # Milestones application flag
-    'MILESTONES_APP': False,
+    'MILESTONES_APP': True,
 
     # Prerequisite courses feature flag
-    'ENABLE_PREREQUISITE_COURSES': False,
+    'ENABLE_PREREQUISITE_COURSES': True,
 
     # Toggle course entrance exams feature
-    'ENTRANCE_EXAMS': False,
+    'ENTRANCE_EXAMS': True,
 
     # Toggle platform-wide course licensing
     'LICENSING': False,
@@ -318,8 +318,8 @@ FEATURES = {
     'ENABLE_GRADE_DOWNLOADS': True,
     'ENABLE_MKTG_SITE': False,
     'ENABLE_DISCUSSION_HOME_PANEL': True,
-    'ENABLE_CORS_HEADERS': False,
-    'ENABLE_CROSS_DOMAIN_CSRF_COOKIE': False,
+    'ENABLE_CORS_HEADERS': True,
+    'ENABLE_CROSS_DOMAIN_CSRF_COOKIE': True,
     'ENABLE_COUNTRY_ACCESS': False,
     'ENABLE_CREDIT_API': False,
     'ENABLE_OAUTH2_PROVIDER': False,
@@ -2066,7 +2066,7 @@ FINANCIAL_REPORTS = {
     'ROOT_PATH': 'sandbox',
 }
 
-CORS_ORIGIN_WHITELIST = []
+CORS_ORIGIN_WHITELIST = ['live.steamforvietnam.org', 'www.live.steamforvietnam.org']
 CORS_ORIGIN_ALLOW_ALL = False
 
 LOGIN_REDIRECT_WHITELIST = []
