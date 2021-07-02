@@ -96,7 +96,11 @@ class XQueueInterface(object):
         queue_name = header_info.get('queue_name', u'')
 
         # Attempt to send to queue
+        # TODO(mark): add some logging here
+        log.debug("DEBUG: calling /xqueue/submit")
         (error, msg) = self._send_to_queue(header, body, files_to_upload)
+        log.debug("DEBUG: err from /xqueue/submit= %s", error)
+        log.debug("DEBUG: msg from /xqueue/submit= %s", msg)
 
         # Log in, then try again
         if error and (msg == 'login_required'):
@@ -110,6 +114,8 @@ class XQueueInterface(object):
                 for f in files_to_upload:
                     f.seek(0)
             (error, msg) = self._send_to_queue(header, body, files_to_upload)
+            log.debug("DEBUG: err from /xqueue/submit= %s", error)
+            log.debug("DEBUG: msg from /xqueue/submit= %s", msg)
 
         return error, msg
 
@@ -118,13 +124,18 @@ class XQueueInterface(object):
             'username': self.auth['username'],
             'password': self.auth['password']
         }
-        return self._http_post(self.url + '/xqueue/login/', payload)
+        log.debug("DEBUG: calling /xqueue/login with username= %s, password= %s", self.auth['username'], self.auth['password'])
+        (error, msg) = self._http_post(self.url + '/xqueue/login/', payload)
+        log.debug("DEBUG: err from /xqueue/login= %s", error)
+        log.debug("DEBUG: msg from /xqueue/login= %s", msg)
+        return (error, msg)
 
     def _send_to_queue(self, header, body, files_to_upload):
         payload = {
             'xqueue_header': header,
             'xqueue_body': body
         }
+        log.debug("DEBUG: payload for /xqueue/submit", payload)
         files = {}
         if files_to_upload is not None:
             for f in files_to_upload:
